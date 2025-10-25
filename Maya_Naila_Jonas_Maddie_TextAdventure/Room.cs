@@ -19,6 +19,8 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         public Room East { get; set; }
         public Room West { get; set; }
 
+        private List<Item> items = new List<Item>();
+
 
 
     }
