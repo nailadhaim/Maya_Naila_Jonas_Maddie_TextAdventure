@@ -21,5 +21,12 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
         public bool IsGameOver { get; private set; }
         public bool IsWin { get; private set; }
+
+        public Rooms(Inventory inventory)
+        {
+            playerInventory = inventory;
+            CurrentRoom = start;
+        }
+
     }
 }
