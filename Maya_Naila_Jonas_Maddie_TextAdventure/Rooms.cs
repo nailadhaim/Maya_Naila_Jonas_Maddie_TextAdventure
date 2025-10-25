@@ -102,5 +102,22 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             CurrentRoom = nextRoom;
             return CurrentRoom.Describe(); 
         }
+
+        public string Fight()
+        {
+            if (!CurrentRoom.HasMonster)
+            {
+                return "There is nothing to fight here.";
+            }
+
+            if (!playerInventory.Has("sword"))
+            {
+                IsGameOver = true;
+                return "You tried to fight the monster without a weapon. DEAD";
+            }
+
+            CurrentRoom.HasMonster = false;
+            return "You fought and defeated the monster. WIN";
+        }
     }
 }
