@@ -10,6 +10,10 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool isDeadly { get; set; }
+        public bool HasMonster { get; set; }
+        public bool RequiresKey { get; set; }
+
 
 
     }
