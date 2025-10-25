@@ -73,7 +73,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             }
             else
             {
-                text += "\nThere doesn’t seem to be anything useful here.\n";
+                text += "\nThere are no items here.\n";
             }
 
             List<string> exits = new List<string>();
@@ -101,7 +101,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             }
             else
             {
-                text += "\nIt seems there’s nowhere else to go from here.\n";
+                text += "\nYou can't go anywhere from here.\n";
             }
 
             return text;

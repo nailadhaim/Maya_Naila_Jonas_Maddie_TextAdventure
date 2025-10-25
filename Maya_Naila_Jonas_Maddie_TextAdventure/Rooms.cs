@@ -40,7 +40,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             up.RequiresKey = true;
 
             down = new Room("Lower room", "You see a sword on the ground.");
-            deeper = new Room("Monster room", "A dark cave, a monster is here");
+            deeper = new Room("Monster room", "You get inside a dark cave, a monster is here");
             deeper.HasMonster = true;
 
             start.West = left;
