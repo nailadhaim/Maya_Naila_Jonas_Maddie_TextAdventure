@@ -52,5 +52,55 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             deeper.North = down;
         }
 
+        public string Move(string direction)
+        {
+            Room nextRoom = null;
+
+            if (direction == "N")
+            {
+                nextRoom = CurrentRoom.North;
+            }
+            else if (direction == "S")
+            {
+                nextRoom = CurrentRoom.South;
+            }
+            else if (direction == "E")
+            {
+                nextRoom = CurrentRoom.East;
+            }
+            else if (direction == "W")
+            {
+                nextRoom = CurrentRoom.West;
+            }
+            else
+            {
+                return "This is not a correct direction.";
+            }
+
+            if (nextRoom == null)
+            {
+                return "You can't go that way.";
+            }
+
+            if (nextRoom.RequiresKey && !playerInventory.Has("key"))
+            {
+                return "This door is locked, you need a key.";
+            }
+
+            if (nextRoom.isDeadly)
+            {
+                IsGameOver = true;
+                return "You stepped into a deadly trap. GAME OVER";
+            }
+
+            if (nextRoom.RequiresKey && playerInventory.Has("key"))
+            {
+                IsWin = true;
+                return "You unlocked the door and escaped. WIN";
+            }
+
+            CurrentRoom = nextRoom;
+            return CurrentRoom.Describe(); 
+        }
     }
 }
