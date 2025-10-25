@@ -58,5 +58,53 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         {
             return items;
         }
+
+        public string Describe()
+        {
+            string text = $"\nYou are in {Name}. {Description}\n";
+
+            if (items.Count > 0)
+            {
+                text += "\nYou see here:\n";
+                foreach (Item i in items)
+                {
+                    text += "- " + i.Name + ": " + i.Description + "\n";
+                }
+            }
+            else
+            {
+                text += "\nThere doesn’t seem to be anything useful here.\n";
+            }
+
+            List<string> exits = new List<string>();
+
+            if (North != null)
+            {
+                exits.Add("north");
+            }
+            if (South != null)
+            {
+                exits.Add("south");
+            }
+            if (East != null)
+            {
+                exits.Add("east");
+            }
+            if (West != null)
+            {
+                exits.Add("west");
+            }
+
+            if (exits.Count > 0)
+            {
+                text += $"\nFrom here, you can go {string.Join(", ", exits)}\n";
+            }
+            else
+            {
+                text += "\nIt seems there’s nowhere else to go from here.\n";
+            }
+
+            return text;
+        }
     }
 }
