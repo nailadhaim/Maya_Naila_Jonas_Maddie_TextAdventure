@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Maya_Naila_Jonas_Maddie_TextAdventure
 {
+    public enum Direction
+    {
+        North,
+        South,
+        East,
+        West
+    }
     internal class Rooms
     {
         public Room CurrentRoom { get; private set; }
@@ -52,26 +59,18 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             deeper.North = down;
         }
 
-        public string Move(string direction)
+        public string Move(Direction direction)
         {
             Room nextRoom = null;
 
-            if (direction == "N")
-            {
+            if (direction == Direction.North)
                 nextRoom = CurrentRoom.North;
-            }
-            else if (direction == "S")
-            {
+            else if (direction == Direction.South)
                 nextRoom = CurrentRoom.South;
-            }
-            else if (direction == "E")
-            {
+            else if (direction == Direction.East)
                 nextRoom = CurrentRoom.East;
-            }
-            else if (direction == "W")
-            {
+            else if (direction == Direction.West)
                 nextRoom = CurrentRoom.West;
-            }
             else
             {
                 return "This is not a correct direction.";
@@ -100,7 +99,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             }
 
             CurrentRoom = nextRoom;
-            return CurrentRoom.Describe(); 
+            return CurrentRoom.Describe();
         }
 
         public string Fight()
