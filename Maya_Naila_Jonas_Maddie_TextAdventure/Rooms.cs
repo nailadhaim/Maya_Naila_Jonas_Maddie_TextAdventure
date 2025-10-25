@@ -26,6 +26,30 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         {
             playerInventory = inventory;
             CurrentRoom = start;
+            SetUpWorld();
+        }
+
+        private void SetUpWorld()
+        {
+            start = new Room("Start room", "You are in the middle of the dungeon");
+            left = new Room("Left room", "Something feels wrong here.");
+            left.isDeadly = true;
+
+            right = new Room("Right room", "You notice a shiny object nearby.");
+            up = new Room("Upper room", "A large locked door blocks your way.");
+            up.RequiresKey = true;
+
+            down = new Room("Lower room", "You see a sword on the ground.");
+            deeper = new Room("Monster room", "A dark cave, a monster is here");
+            deeper.HasMonster = true;
+
+            start.West = left;
+            start.East = right;
+            start.North = up;
+            start.South = down;
+
+            down.South = deeper;
+            deeper.North = down;
         }
 
     }
