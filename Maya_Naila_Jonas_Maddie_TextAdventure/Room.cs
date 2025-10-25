@@ -8,5 +8,9 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 {
     internal class Room
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+
     }
 }
