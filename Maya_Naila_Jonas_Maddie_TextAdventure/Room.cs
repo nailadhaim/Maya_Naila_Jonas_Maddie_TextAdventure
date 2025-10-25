@@ -21,7 +21,13 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
         private List<Item> items = new List<Item>();
 
-
-
+        public Room(string name, string description)
+        {
+            Name = name;
+            Description = description;
+            isDeadly = false;
+            HasMonster = false;
+            RequiresKey = false;
+        }
     }
 }
