@@ -14,6 +14,11 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         public bool HasMonster { get; set; }
         public bool RequiresKey { get; set; }
 
+        public Room North { get; set; }
+        public Room South { get; set; }
+        public Room East { get; set; }
+        public Room West { get; set; }
+
 
 
     }
