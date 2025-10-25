@@ -17,5 +17,9 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         private Room down;
         private Room deeper;
 
+        private Inventory playerInventory;
+
+        public bool IsGameOver { get; private set; }
+        public bool IsWin { get; private set; }
     }
 }
