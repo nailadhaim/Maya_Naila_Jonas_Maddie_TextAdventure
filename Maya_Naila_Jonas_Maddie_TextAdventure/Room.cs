@@ -29,5 +29,34 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             HasMonster = false;
             RequiresKey = false;
         }
+
+        public void AddItem(Item item)
+        {
+            items.Add(item);
+        }
+
+        public Item TakeItem(string id)
+        {
+            Item foundItem = null;
+            foreach (Item item in items)
+            {
+                if (item.Id == id)
+                {
+                    foundItem = item;
+                    break;
+                }
+            }
+
+            if (foundItem != null)
+            {
+                items.Remove(foundItem);
+            }
+            return foundItem;
+        }
+        
+        public List<Item> GetItems()
+        {
+            return items;
+        }
     }
 }
