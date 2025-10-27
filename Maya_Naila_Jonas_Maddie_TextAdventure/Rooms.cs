@@ -40,7 +40,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         {
             start = new Room("Start room", "You are in the middle of the dungeon");
             left = new Room("Left room", "Something feels wrong here.");
-            left.isDeadly = true;
+            left.IsDeadly = true;
 
             right = new Room("Right room", "You notice a shiny object nearby.");
             up = new Room("Upper room", "A large locked door blocks your way.");
@@ -49,6 +49,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             down = new Room("Lower room", "You see a sword on the ground.");
             deeper = new Room("Monster room", "You get inside a dark cave, a monster is here");
             deeper.HasMonster = true;
+            deeper.MonsterAlive = true;
 
             start.West = left;
             start.East = right;
@@ -63,18 +64,27 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         {
             Room nextRoom = null;
 
-            if (direction == Direction.North)
-                nextRoom = CurrentRoom.North;
-            else if (direction == Direction.South)
-                nextRoom = CurrentRoom.South;
-            else if (direction == Direction.East)
-                nextRoom = CurrentRoom.East;
-            else if (direction == Direction.West)
-                nextRoom = CurrentRoom.West;
-            else
+            switch (direction)
             {
-                return "This is not a correct direction.";
+                case Direction.North:
+                    nextRoom = CurrentRoom.North;
+                    break;
+                case Direction.South:
+                    nextRoom = CurrentRoom.South;
+                    break;
+
+                case Direction.East:
+                    nextRoom = CurrentRoom.East;
+                    break;
+
+                case Direction.West:
+                    nextRoom = CurrentRoom.West;
+                    break;
+
+                default:
+                    return "This is not a correct direction.";
             }
+
 
             if (nextRoom == null)
             {
@@ -86,7 +96,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 return "This door is locked, you need a key.";
             }
 
-            if (nextRoom.isDeadly)
+            if (nextRoom.IsDeadly)
             {
                 IsGameOver = true;
                 return "You stepped into a deadly trap. GAME OVER";
@@ -98,12 +108,18 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 return "You unlocked the door and escaped. WIN";
             }
 
+            if (CurrentRoom.HasMonster && CurrentRoom.MonsterAlive)
+            {
+                IsGameOver = true;
+                return "You tried to run away while the monster is alive. DEAD";
+            }
+
             CurrentRoom = nextRoom;
             return CurrentRoom.Describe();
         }
 
         public string Fight()
-        {
+        {   
             if (!CurrentRoom.HasMonster)
             {
                 return "There is nothing to fight here.";
@@ -115,8 +131,13 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 return "You tried to fight the monster without a weapon. DEAD";
             }
 
-            CurrentRoom.HasMonster = false;
-            return "You fought and defeated the monster. WIN";
+            if (CurrentRoom.MonsterAlive == false)
+            {
+                return "The monster is already defeated.";
+            }
+
+            CurrentRoom.MonsterAlive = false;
+            return "You fought and defeated the monster!";
         }
     }
 }

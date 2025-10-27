@@ -10,8 +10,9 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool isDeadly { get; set; }
+        public bool IsDeadly { get; set; }
         public bool HasMonster { get; set; }
+        public bool MonsterAlive { get; set; }
         public bool RequiresKey { get; set; }
 
         public Room North { get; set; }
@@ -25,9 +26,10 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         {
             Name = name;
             Description = description;
-            isDeadly = false;
+            IsDeadly = false;
             HasMonster = false;
             RequiresKey = false;
+            MonsterAlive = false;
         }
 
         public void AddItem(Item item)
