@@ -101,7 +101,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             }
             else
             {
-                text += "\nYou can't go anywhere from here.\n";
+                text += "\nYou can't go anywhere from here\n";
             }
 
             return text;
