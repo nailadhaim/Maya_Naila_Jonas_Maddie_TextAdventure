@@ -6,6 +6,10 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
     {
         static void Main(string[] args)
         {
+            Inventory inventory = new Inventory();
+            GameSetup setup = new GameSetup();
+            Rooms rooms = new Rooms(inventory, setup);
+
             bool condition = true;
             while(condition == true)
             {
