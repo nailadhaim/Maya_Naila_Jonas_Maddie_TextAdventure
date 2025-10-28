@@ -27,9 +27,19 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             deeper.MonsterAlive = true;
 
             start.West = left;
+            left.East = start;
+
             start.East = right;
+            right.West = start;
+
             start.North = up;
+            up.South = start;
+
             start.South = down;
+            down.North = start;
+
+            down.South = deeper;
+            deeper.North = down;
 
             down.South = deeper;
             deeper.North = down;

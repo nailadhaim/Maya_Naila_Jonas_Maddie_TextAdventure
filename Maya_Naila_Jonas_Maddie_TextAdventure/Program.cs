@@ -13,7 +13,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             rooms = new Rooms(inventory, setup);
 
             bool condition = true;
-            Console.WriteLine("hello, welcome to the text adventure game!!");
+            Console.WriteLine("Hello, welcome to the text adventure game!!");
             while (condition == true)
             {
                 string input = Console.ReadLine();
@@ -57,15 +57,15 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         }
         static void SHowCommands()
         {
-            Console.WriteLine("Beschikbare commando's:");
+            Console.WriteLine("Available commands:");
             Console.WriteLine("--------------------------------");
-            Console.WriteLine("help              — toon deze lijst met commando’s");
-            Console.WriteLine("look              — toon inventory, huidige kamer, items in de kamer, en uitgangen");
-            Console.WriteLine("inventory         — toon enkel inventory");
-            Console.WriteLine("go n|e|s|w        — beweeg naar een kamer in de aangegeven richting (noord, oost, zuid, west)");
-            Console.WriteLine("take <id>         — pak een item op met de gegeven id");
-            Console.WriteLine("fight             — vecht met het monster als je in de juiste kamer bent");
-            Console.WriteLine("quit              — stop het spel");
+            Console.WriteLine("help              - show the list of commands");
+            Console.WriteLine("look              - show inventory, current room, items in the room, and exits");
+            Console.WriteLine("inventory         - show only your inventory");
+            Console.WriteLine("go n|e|s|w        - move to a room in the given direction (north, east, south, west)");
+            Console.WriteLine("take <id>         - pick up an item with the given id");
+            Console.WriteLine("fight             - fight the monster if you are in the correct room");
+            Console.WriteLine("quit              - quit the game");
             Console.WriteLine("--------------------------------");
         }
         static void showAll()
@@ -103,7 +103,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 case "e": dir = Direction.East; break;
                 case "w": dir = Direction.West; break;
                 default:
-                    Console.WriteLine("That’s not a valid direction.");
+                    Console.WriteLine("\nThat’s not a valid direction.\n");
                     return;
             }
 
@@ -120,7 +120,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             var item = rooms.CurrentRoom.TakeItem(itemId);
             if (item == null)
             {
-                Console.WriteLine("There’s no such item here.");
+                Console.WriteLine("\nThere’s no such item here.\n");
                 return;
             }
 
