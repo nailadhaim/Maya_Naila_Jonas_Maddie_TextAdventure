@@ -33,6 +33,11 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
             down.South = deeper;
             deeper.North = down;
+
+            right.AddItem(new Item("key", "Key", "An old key"));
+            down.AddItem(new Item("sword", "Sword", "A sharp weapon to defend yourself"));
+
+            StartRoom = start;
         }
     }
 }
