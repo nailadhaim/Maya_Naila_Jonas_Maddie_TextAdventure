@@ -98,12 +98,12 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 return "You tried to fight the monster without a weapon. DEAD";
             }
 
-            if (CurrentRoom.MonsterAlive == false)
+            if (!CurrentRoom.MonsterAlive)
             {
                 return "The monster is already defeated.";
             }
 
-            CurrentRoom.MonsterAlive = false;
+            CurrentRoom.KillMonster();
             return "You fought and defeated the monster!";
         }
     }
