@@ -86,7 +86,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         }
 
         public string Fight()
-        {   
+        {
             if (!CurrentRoom.HasMonster)
             {
                 return "There is nothing to fight here.";
@@ -98,12 +98,12 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 return "You tried to fight the monster without a weapon. DEAD";
             }
 
-            if (!CurrentRoom.MonsterAlive)
+            if (CurrentRoom.MonsterAlive == false)
             {
                 return "The monster is already defeated.";
             }
 
-            CurrentRoom.KillMonster();
+            CurrentRoom.MonsterAlive = false;
             return "You fought and defeated the monster!";
         }
     }
