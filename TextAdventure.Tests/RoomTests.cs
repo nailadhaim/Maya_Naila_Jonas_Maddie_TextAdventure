@@ -31,7 +31,7 @@ public class RoomTests
     }
 
     [TestMethod]
-    public void DescribeIncludeItems()
+    public void Describe_IncludeItems()
     {
         Room room1 = new Room("Start room", "The start point");
         Room room2 = new Room("Next room", "Room connected to the start");
@@ -45,12 +45,12 @@ public class RoomTests
     }
 
     [TestMethod]
-    public void DescribeNoItems()
+    public void Describe_NoItems()
     {
         Room room = new Room("Empty room", "A bare room");
 
         string description = room.Describe();
 
-        Assert.IsTrue(description.Contains("There are no items here."));
+        Assert.IsTrue(description.Contains("There are no items here"));
     }
 }

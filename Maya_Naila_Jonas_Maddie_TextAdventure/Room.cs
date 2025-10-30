@@ -75,7 +75,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             }
             else
             {
-                text += "\nThere are no items here.\n";
+                text += "\nThere are no items here\n";
             }
 
             List<string> exits = new List<string>();
