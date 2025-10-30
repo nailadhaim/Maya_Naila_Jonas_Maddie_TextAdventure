@@ -1,31 +1,25 @@
-﻿using Xunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maya_Naila_Jonas_Maddie_TextAdventure;
-using Assert = Xunit.Assert;
 
 namespace TextAdventure.Tests
 {
-    public class ItemTests
+    [TestClass]
+    public sealed class ItemTests
     {
-        [Fact]
-        public void Constructor_ShouldInitializeProperties()
+        [TestMethod]
+        public void Constructor_AssignsPropertiesCorrectly()
         {
-            string id = "sword";
-            string name = "Sword";
-            string description = "A sharp blade";
-
-            var item = new Item(id, name, description);
-
-            Assert.Equal(id, item.Id);
-            Assert.Equal(name, item.Name);
-            Assert.Equal(description, item.Description);
+            Item sword = new Item("sword", "Sword", "A sharp weapon");
+            Assert.AreEqual("sword", sword.Id);
+            Assert.AreEqual("Sword", sword.Name);
+            Assert.AreEqual("A sharp weapon", sword.Description);
         }
 
-        [Fact]
-        public void ToString_ShouldReturnFormattedString()
+        [TestMethod]
+        public void ToString_ReturnsCorrectFormat()
         {
-            var item = new Item("key", "Key", "Opens a locked door");
-            string result = item.ToString();
-            Assert.Equal("Key (key): Opens a locked door", result);
+            Item sword = new Item("sword", "Sword", "A sharp weapon");
+            Assert.AreEqual("Sword (sword): A sharp weapon", sword.ToString());
         }
     }
 }

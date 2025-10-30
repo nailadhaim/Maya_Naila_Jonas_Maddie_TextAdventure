@@ -5,7 +5,10 @@ VisualStudioVersion = 17.14.36203.30
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maya_Naila_Jonas_Maddie_TextAdventure", "Maya_Naila_Jonas_Maddie_TextAdventure\Maya_Naila_Jonas_Maddie_TextAdventure.csproj", "{FEC99E46-D961-4B8A-B349-33E53811B980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextAdventure.Tests", "TextAdventure.Tests\TextAdventure.Tests.csproj", "{DD2F1134-2C85-A0F4-9A44-850BB988EDC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextAdventure.Tests", "TextAdventure.Tests\TextAdventure.Tests.csproj", "{5152DC3E-20EA-4990-B829-4E3E0B10159B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEC99E46-D961-4B8A-B349-33E53811B980} = {FEC99E46-D961-4B8A-B349-33E53811B980}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +20,10 @@ Global
 		{FEC99E46-D961-4B8A-B349-33E53811B980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEC99E46-D961-4B8A-B349-33E53811B980}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEC99E46-D961-4B8A-B349-33E53811B980}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD2F1134-2C85-A0F4-9A44-850BB988EDC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD2F1134-2C85-A0F4-9A44-850BB988EDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD2F1134-2C85-A0F4-9A44-850BB988EDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD2F1134-2C85-A0F4-9A44-850BB988EDC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5152DC3E-20EA-4990-B829-4E3E0B10159B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5152DC3E-20EA-4990-B829-4E3E0B10159B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5152DC3E-20EA-4990-B829-4E3E0B10159B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5152DC3E-20EA-4990-B829-4E3E0B10159B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

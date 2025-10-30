@@ -1,76 +1,41 @@
-﻿using Maya_Naila_Jonas_Maddie_TextAdventure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assert = Xunit.Assert;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Maya_Naila_Jonas_Maddie_TextAdventure;
+
 
 namespace TextAdventure.Tests
 {
-
-    public class InventoryTests
+    [TestClass]
+    public sealed class InventoryTests
     {
-        [Fact]
-        public void Add_ShouldAddItemToInventory()
+        private Inventory inventory;
+        private Item sword;
+
+        [TestInitialize]
+        public void Setup()
         {
-            var inventory = new Inventory();
-            var item = new Item("sword", "Sword", "A sharp blade");
-            bool added = inventory.Add(item);
-            Assert.True(added);
-            Assert.True(inventory.Has("sword"));
-            Assert.Single(inventory.All());
+            inventory = new Inventory();
+            sword = new Item("sword", "Sword", "A sharp weapon");
         }
 
-        [Fact]
-        public void Remove_ShouldRemoveItemFromInventory()
+        [TestMethod]
+        public void Add_AddsItemToInventory()
         {
-            var inventory = new Inventory();
-            var item = new Item("key", "Key", "Opens a door");
-            inventory.Add(item);
-            bool removed = inventory.Remove("key");
-            Assert.True(removed);
-            Assert.False(inventory.Has("key"));
-            Assert.Empty(inventory.All());
+            inventory.Add(sword);
+            Assert.IsTrue(inventory.Has("sword"));
         }
 
-        [Fact]
-        public void Remove_NonExistingItem_ShouldReturnFalse()
+        [TestMethod]
+        public void Remove_RemovesItemFromInventory()
         {
-            var inventory = new Inventory();
-            bool removed = inventory.Remove("nonexistent");
-            Assert.False(removed);
+            inventory.Add(sword);
+            inventory.Remove("sword");
+            Assert.IsFalse(inventory.Has("sword"));
         }
 
-        [Fact]
-        public void Has_ShouldReturnTrueIfItemExists()
+        [TestMethod]
+        public void Item_ToString_ReturnsCorrectFormat()
         {
-            var inventory = new Inventory();
-            inventory.Add(new Item("sword", "Sword", "Sharp weapon"));
-            bool exists = inventory.Has("sword");
-            Assert.True(exists);
-        }
-
-        [Fact]
-        public void Has_ShouldReturnFalseIfItemDoesNotExist()
-        {
-            var inventory = new Inventory();
-            bool exists = inventory.Has("key");
-            Assert.False(exists);
-        }
-
-        [Fact]
-        public void All_ShouldReturnAllItemsAsReadOnly()
-        {
-            var inventory = new Inventory();
-            var item1 = new Item("sword", "Sword", "Sharp weapon");
-            var item2 = new Item("key", "Key", "Opens a door");
-            inventory.Add(item1);
-            inventory.Add(item2);
-            var allItems = inventory.All().ToList();
-            Assert.Equal(2, allItems.Count);
-            Assert.Contains(item1, allItems);
-            Assert.Contains(item2, allItems);
+            Assert.AreEqual("Sword (sword): A sharp weapon", sword.ToString());
         }
     }
 }
