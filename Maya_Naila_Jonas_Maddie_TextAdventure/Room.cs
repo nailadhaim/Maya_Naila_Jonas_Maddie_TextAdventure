@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Maya_Naila_Jonas_Maddie_TextAdventure
 {
-    internal class Room
+    public class Room
     {
         private string name;
         public string Name { get => string.IsNullOrWhiteSpace(name) ? "Uknown room": name ; set => name = value; }

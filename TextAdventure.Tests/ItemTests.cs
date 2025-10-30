@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using Maya_Naila_Jonas_Maddie_TextAdventure;
+using Assert = Xunit.Assert;
 
 namespace TextAdventure.Tests
 {
