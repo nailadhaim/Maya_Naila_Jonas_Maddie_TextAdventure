@@ -49,36 +49,36 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                     break;
 
                 default:
-                    return "This is not a correct direction.";
+                    return "This is not a correct direction";
             }
 
 
             if (nextRoom == null)
             {
-                return "You can't go that way.";
+                return "You can't go that way";
             }
 
             if (nextRoom.RequiresKey && !playerInventory.Has("key"))
             {
-                return "This door is locked, you need a key.";
+                return "This door is locked, you need a key!";
             }
 
             if (nextRoom.IsDeadly)
             {
                 IsGameOver = true;
-                return "You stepped into a deadly trap. GAME OVER";
+                return "You stepped into a deadly trap => GAME OVER";
             }
 
             if (nextRoom.RequiresKey && playerInventory.Has("key"))
             {
                 IsWin = true;
-                return "You unlocked the door and escaped. WIN";
+                return "You unlocked the door and escaped => WIN";
             }
 
             if (CurrentRoom.HasMonster && CurrentRoom.MonsterAlive)
             {
                 IsGameOver = true;
-                return "You tried to run away while the monster is alive. DEAD";
+                return "You tried to run away while the monster is alive => DEAD";
             }
 
             CurrentRoom = nextRoom;
@@ -89,22 +89,22 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         {
             if (!CurrentRoom.HasMonster)
             {
-                return "There is nothing to fight here.";
+                return "There is nothing to fight here";
             }
 
             if (!playerInventory.Has("sword"))
             {
                 IsGameOver = true;
-                return "You tried to fight the monster without a weapon. DEAD";
+                return "You tried to fight the monster without a weapon => DEAD";
             }
 
             if (CurrentRoom.MonsterAlive == false)
             {
-                return "The monster is already defeated.";
+                return "The monster is already defeated";
             }
 
             CurrentRoom.MonsterAlive = false;
-            return "You fought and defeated the monster!";
+            return "You fought and defeated the monster!!";
         }
     }
 }
