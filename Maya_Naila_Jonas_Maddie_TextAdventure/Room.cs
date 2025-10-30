@@ -8,23 +8,12 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 {
     public class Room
     {
-        private string name;
-        public string Name { get => string.IsNullOrWhiteSpace(name) ? "Uknown room": name ; set => name = value; }
-
-        private string description;
-        public string Description { get => string.IsNullOrWhiteSpace(description) ? "No description available." : description; set => description = value; }
-
-        private bool isDeadly;
-        public bool IsDeadly { get => isDeadly; private set => isDeadly = value; }
-
-        private bool hasMonster;
-        public bool HasMonster { get => hasMonster; private set => hasMonster = value; }
-
-        private bool monsterAlive;
-        public bool MonsterAlive { get => monsterAlive; private set => monsterAlive = value; }
-
-        private bool requiresKey;
-        public bool RequiresKey { get => requiresKey; private set => requiresKey = value; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public bool IsDeadly { get; set; }
+        public bool HasMonster { get; set; }
+        public bool MonsterAlive { get; set; }
+        public bool RequiresKey { get; set; }
 
         public Room North { get; set; }
         public Room South { get; set; }
@@ -41,12 +30,6 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             HasMonster = false;
             RequiresKey = false;
             MonsterAlive = false;
-        }
-
-        public Room(string name, string description, bool isDeadly,bool requiresKey) : this(name, description)
-        {
-            this.isDeadly = isDeadly;
-            this.requiresKey = requiresKey;
         }
 
         public void AddItem(Item item)
@@ -72,7 +55,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             }
             return foundItem;
         }
-        
+
         public List<Item> GetItems()
         {
             return items;
@@ -125,17 +108,5 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
             return text;
         }
-
-        public void ActiveMonster()
-        {
-            hasMonster = true;
-            monsterAlive = true;
-        }
-
-        public void KillMonster()
-        {
-            MonsterAlive = false;
-        }
-
     }
 }

@@ -14,14 +14,17 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         public GameSetup()
         {
             Room start = new Room("Start room", "You are in the middle of the dungeon");
-            Room left = new Room("Left room", "Something feels wrong here.",true,false);
+            Room left = new Room("Left room", "Something feels wrong here.");
+            left.IsDeadly = true;
 
             Room right = new Room("Right room", "You notice a shiny object nearby.");
-            Room up = new Room("Upper room", "A large locked door blocks your way.",false,true);
+            Room up = new Room("Upper room", "A large locked door blocks your way.");
+            up.RequiresKey = true;
 
             Room down = new Room("Lower room", "You see a sword on the ground.");
             Room deeper = new Room("Monster room", "You get inside a dark cave, a monster is here");
-            deeper.ActiveMonster();
+            deeper.HasMonster = true;
+            deeper.MonsterAlive = true;
 
             start.West = left;
             left.East = start;
@@ -34,6 +37,9 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
             start.South = down;
             down.North = start;
+
+            down.South = deeper;
+            deeper.North = down;
 
             down.South = deeper;
             deeper.North = down;
