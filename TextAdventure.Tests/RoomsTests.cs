@@ -27,7 +27,7 @@ public class RoomsTests
 
         string result = rooms.Move(Direction.North);
 
-        Assert.AreEqual("The door is locked, you need a key", result);
+        Assert.AreEqual("This door is locked, you need a key!", result);
     }
 
     [TestMethod]
@@ -55,7 +55,7 @@ public class RoomsTests
 
         string result = rooms.Fight();
 
-        Assert.AreEqual("You fought and defeated the monster", result);
+        Assert.AreEqual("You fought and defeated the monster!!", result);
         Assert.IsFalse(rooms.CurrentRoom.MonsterAlive);
     }
 
@@ -71,6 +71,6 @@ public class RoomsTests
         string result = rooms.Fight();
 
         Assert.IsTrue(rooms.IsGameOver);
-        Assert.AreEqual("You fought the monster without a weapon => DEAD", result);
+        Assert.AreEqual("You tried to fight the monster without a weapon => DEAD", result);
     }
 }
