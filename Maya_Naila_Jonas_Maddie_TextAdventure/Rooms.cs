@@ -13,7 +13,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         East,
         West
     }
-    internal class Rooms
+    public class Rooms
     {
         public Room CurrentRoom { get; private set; }
         private Inventory playerInventory;

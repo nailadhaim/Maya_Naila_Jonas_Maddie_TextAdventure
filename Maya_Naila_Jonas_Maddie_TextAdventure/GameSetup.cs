@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Maya_Naila_Jonas_Maddie_TextAdventure
 {
-    internal class GameSetup
+    public class GameSetup
     {
         public Room StartRoom { get; private set; }
 
