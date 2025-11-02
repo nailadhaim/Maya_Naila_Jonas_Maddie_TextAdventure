@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maya_Naila_Jonas_Maddie_TextAdventure", "Maya_Naila_Jonas_Maddie_TextAdventure\Maya_Naila_Jonas_Maddie_TextAdventure.csproj", "{FEC99E46-D961-4B8A-B349-33E53811B980}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextAdventure.Tests", "TextAdventure.Tests\TextAdventure.Tests.csproj", "{60B48990-5AA4-4EDB-B2D9-CF651DB98EB8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEC99E46-D961-4B8A-B349-33E53811B980} = {FEC99E46-D961-4B8A-B349-33E53811B980}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
