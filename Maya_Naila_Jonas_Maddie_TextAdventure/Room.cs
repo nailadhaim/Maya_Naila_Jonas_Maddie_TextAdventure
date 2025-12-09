@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Maya_Naila_Jonas_Maddie_TextAdventure
 {
     public class Room
     {
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         public bool IsDeadly { get; set; }
         public bool HasMonster { get; set; }
         public bool MonsterAlive { get; set; }
@@ -22,15 +22,38 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
         private List<Item> items = new List<Item>();
 
-        public Room(string name, string description)
+        public Room(string name, string description, bool encrypted = false)
         {
             Name = name;
-            Description = description;
+
+       
+            Description = encrypted ? EncryptText(description) : description;
+
             IsDeadly = false;
             HasMonster = false;
             RequiresKey = false;
             MonsterAlive = false;
         }
+        
+        public static string EncryptText(string text)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
+        }
+
+        public static string DecryptText(string encrypted)
+        {
+            try
+            {
+                var bytes = Convert.FromBase64String(encrypted);
+                return Encoding.UTF8.GetString(bytes);
+            }
+            catch
+            {
+             
+                return encrypted;
+            }
+        }
+     
 
         public void AddItem(Item item)
         {
@@ -39,20 +62,11 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
         public Item TakeItem(string id)
         {
-            Item foundItem = null;
-            foreach (Item item in items)
-            {
-                if (item.Id == id)
-                {
-                    foundItem = item;
-                    break;
-                }
-            }
+            var foundItem = items.Find(i => i.Id == id);
 
             if (foundItem != null)
-            {
                 items.Remove(foundItem);
-            }
+
             return foundItem;
         }
 
@@ -63,7 +77,9 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
         public string Describe()
         {
-            string text = $"\nYou are in {Name}. {Description}\n";
+            string decryptedDescription = DecryptText(Description);
+
+            string text = $"\nYou are in {Name}. {decryptedDescription}\n";
 
             if (items.Count > 0)
             {
@@ -80,22 +96,10 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
             List<string> exits = new List<string>();
 
-            if (North != null)
-            {
-                exits.Add("north");
-            }
-            if (South != null)
-            {
-                exits.Add("south");
-            }
-            if (East != null)
-            {
-                exits.Add("east");
-            }
-            if (West != null)
-            {
-                exits.Add("west");
-            }
+            if (North != null) exits.Add("north");
+            if (South != null) exits.Add("south");
+            if (East != null) exits.Add("east");
+            if (West != null) exits.Add("west");
 
             if (exits.Count > 0)
             {
