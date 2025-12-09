@@ -13,7 +13,11 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
         public GameSetup()
         {
-            Room start = new Room("Start room", "You are in the middle of the dungeon");
+            Room start = new Room(
+                "Start room", 
+                Convert.ToBase64String(Encoding.UTF8.GetBytes("You are in the middle of the dungeon"))
+            );
+
             Room left = new Room("Left room", "Something feels wrong here");
             left.IsDeadly = true;
 

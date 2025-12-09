@@ -60,8 +60,9 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
             if (nextRoom.RequiresKey && !playerInventory.Has("key"))
             {
-                return "This door is locked, you need a key!";
+                return "This door is locked. Try retrieving keyshare using command: keyshare " + nextRoom.Name;
             }
+
 
             if (nextRoom.IsDeadly)
             {

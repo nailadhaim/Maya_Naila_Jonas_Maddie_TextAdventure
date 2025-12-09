@@ -6,13 +6,32 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
     {
         static Inventory inventory;
         static Rooms rooms;
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             inventory = new Inventory();
             GameSetup setup = new GameSetup();
             rooms = new Rooms(inventory, setup);
-
+                
             bool condition = true;
+            ApiClient api = new ApiClient();
+
+            Console.WriteLine("=== LOGIN ===");
+            Console.Write("Username: ");
+            string user = Console.ReadLine();
+
+            Console.Write("Password: ");
+            string pass = Console.ReadLine();
+
+            bool ok = await api.Login(user, pass);
+
+            if (!ok)
+            {
+                Console.WriteLine("❌ Login failed");
+                return;
+            }
+
+            Console.WriteLine("✅ Login success!");
+
             Console.WriteLine("Hello, welcome to the text adventure game!!");
             while (condition == true)
             {
@@ -44,6 +63,21 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                         break;
                     case "fight":
                         fight();
+                        break;
+                    case "keyshare":
+                        Console.Write("Enter room ID (example: 1): ");
+                        string id = Console.ReadLine();
+
+                        var key = await api.GetKeyshare(id);
+                        if (key == null)
+                        {
+                            Console.WriteLine("❌ Not allowed or invalid room");
+                        }
+                        else
+                        {
+                            Console.WriteLine("🔑 Received keyshare: " + key);
+                            inventory.Add(new Item("key", "Key", "A mysterious extracted keyshare"));
+                        }
                         break;
                     case "quit":
                         condition = false;

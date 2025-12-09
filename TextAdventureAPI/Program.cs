@@ -39,9 +39,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-// ---------------------------
-// REGISTER
-// ---------------------------
+
 app.MapPost("/api/auth/register", ([FromBody] RegisterRequest req) =>
 {
     if (string.IsNullOrWhiteSpace(req.Username) || string.IsNullOrWhiteSpace(req.Password))
@@ -65,9 +63,7 @@ app.MapPost("/api/auth/register", ([FromBody] RegisterRequest req) =>
 });
 
 
-// ---------------------------
-// LOGIN
-// ---------------------------
+
 app.MapPost("/api/auth/login", ([FromBody] LoginRequest req) =>
 {
     var user = users.FirstOrDefault(u => u.Username == req.Username);
@@ -98,9 +94,7 @@ app.MapPost("/api/auth/login", ([FromBody] LoginRequest req) =>
 });
 
 
-// ---------------------------
-// /me endpoint
-// ---------------------------
+
 app.MapGet("/api/auth/me", (HttpContext ctx) =>
 {
     var user = GetUserFromClaims(ctx);
@@ -112,9 +106,7 @@ app.MapGet("/api/auth/me", (HttpContext ctx) =>
 }).RequireAuthorization();
 
 
-// ---------------------------
-// KEYSHARE (admin or room 1)
-// ---------------------------
+
 app.MapGet("/api/keys/keyshare/{roomId}", (string roomId, HttpContext ctx) =>
 {
     var user = GetUserFromClaims(ctx);
@@ -134,9 +126,7 @@ app.MapGet("/api/keys/keyshare/{roomId}", (string roomId, HttpContext ctx) =>
 app.Run();
 
 
-// ======================================================
-// HELPERS
-// ======================================================
+
 
 static string ComputeSha256(string input)
 {
@@ -182,9 +172,6 @@ static User? GetUserFromClaims(HttpContext ctx)
 }
 
 
-// ======================================================
-// MODELS
-// ======================================================
 
 record RegisterRequest(string Username, string Password, string? Role);
 record LoginRequest(string Username, string Password);
