@@ -22,15 +22,16 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             Console.Write("Password: ");
             string pass = Console.ReadLine();
 
-            bool ok = await api.Login(user, pass);
+            var (ok, _) = await api.Login(user, pass);
 
             if (!ok)
             {
-                Console.WriteLine("❌ Login failed");
+                Console.WriteLine($"❌ Login failed");
                 return;
             }
 
             Console.WriteLine("✅ Login success!");
+
 
             Console.WriteLine("Hello, welcome to the text adventure game!!");
             while (condition == true)
@@ -68,16 +69,17 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                         Console.Write("Enter room ID (example: 1): ");
                         string id = Console.ReadLine();
 
-                        var key = await api.GetKeyshare(id);
-                        if (key == null)
+                        var (keyshare, error) = await api.GetKeyshare(id);
+                        if (string.IsNullOrEmpty(keyshare))
                         {
-                            Console.WriteLine("❌ Not allowed or invalid room");
+                            Console.WriteLine("❌ Not allowed or invalid room: " + error);
                         }
                         else
                         {
-                            Console.WriteLine("🔑 Received keyshare: " + key);
+                            Console.WriteLine("🔑 Received keyshare: " + keyshare);
                             inventory.Add(new Item("key", "Key", "A mysterious extracted keyshare"));
                         }
+
                         break;
                     case "quit":
                         condition = false;

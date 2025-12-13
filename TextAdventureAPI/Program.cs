@@ -3,11 +3,38 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// JWT config
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TextAdventure API", Version = "v1" });
+
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        Description = "Put ONLY your JWT token here (no 'Bearer ' prefix)",
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+});
+
 var jwtSecret = builder.Configuration["JwtSettings:SecretKey"]
                 ?? throw new Exception("JWT secret missing!");
 
@@ -15,7 +42,6 @@ var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
 
 var users = new List<User>();
 
-// Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -37,8 +63,8 @@ var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapPost("/api/auth/register", ([FromBody] RegisterRequest req) =>
 {
@@ -62,8 +88,6 @@ app.MapPost("/api/auth/register", ([FromBody] RegisterRequest req) =>
     return Results.Ok("Registered.");
 });
 
-
-
 app.MapPost("/api/auth/login", ([FromBody] LoginRequest req) =>
 {
     var user = users.FirstOrDefault(u => u.Username == req.Username);
@@ -79,7 +103,6 @@ app.MapPost("/api/auth/login", ([FromBody] LoginRequest req) =>
     if (hash != user.PasswordHash)
     {
         user.FailedLogins++;
-
         if (user.FailedLogins >= 3)
             user.IsLocked = true;
 
@@ -89,23 +112,17 @@ app.MapPost("/api/auth/login", ([FromBody] LoginRequest req) =>
     user.FailedLogins = 0;
 
     var token = GenerateJwt(user, key, builder);
-
     return Results.Ok(new { token });
 });
-
-
 
 app.MapGet("/api/auth/me", (HttpContext ctx) =>
 {
     var user = GetUserFromClaims(ctx);
-
     if (user == null)
         return Results.Unauthorized();
 
     return Results.Ok(new { user.Username, user.Role });
 }).RequireAuthorization();
-
-
 
 app.MapGet("/api/keys/keyshare/{roomId}", (string roomId, HttpContext ctx) =>
 {
@@ -117,16 +134,10 @@ app.MapGet("/api/keys/keyshare/{roomId}", (string roomId, HttpContext ctx) =>
         return Results.BadRequest("You are not allowed to access this keyshare.");
 
     var keyshare = "secret-share-" + roomId;
-
     return Results.Ok(keyshare);
 }).RequireAuthorization();
 
-
-
 app.Run();
-
-
-
 
 static string ComputeSha256(string input)
 {
@@ -141,8 +152,9 @@ static string GenerateJwt(User user, SymmetricSecurityKey key, WebApplicationBui
 
     var claims = new[]
     {
-        new Claim("username", user.Username),
-        new Claim("role", user.Role)
+        new Claim(ClaimTypes.Name, user.Username),
+        new Claim(ClaimTypes.Role, user.Role)
+
     };
 
     var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
@@ -158,8 +170,9 @@ static string GenerateJwt(User user, SymmetricSecurityKey key, WebApplicationBui
 
 static User? GetUserFromClaims(HttpContext ctx)
 {
-    var username = ctx.User.FindFirst("username")?.Value;
-    var role = ctx.User.FindFirst("role")?.Value;
+    var username = ctx.User.Identity?.Name;
+    var role = ctx.User.FindFirst(ClaimTypes.Role)?.Value;
+
 
     if (username == null || role == null)
         return null;
@@ -167,20 +180,20 @@ static User? GetUserFromClaims(HttpContext ctx)
     return new User
     {
         Username = username,
-        Role = role
+        Role = role,
+        PasswordHash = string.Empty, // of null, als je dat toestaat
+        IsLocked = false
     };
 }
-
-
 
 record RegisterRequest(string Username, string Password, string? Role);
 record LoginRequest(string Username, string Password);
 
 class User
 {
-    public string Username { get; set; }
-    public string PasswordHash { get; set; }
-    public string Role { get; set; }
+    public required string Username { get; set; }
+    public required string PasswordHash { get; set; }
+    public required string Role { get; set; }
     public int FailedLogins { get; set; }
     public bool IsLocked { get; set; }
 }
