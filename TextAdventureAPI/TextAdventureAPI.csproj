@@ -15,9 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Auth\" />
-	  <Folder Include="Endpoints\" />
-	  <Folder Include="Models\" />
+	  <ProjectReference Include="..\Maya_Naila_Jonas_Maddie_TextAdventure\Maya_Naila_Jonas_Maddie_TextAdventure.csproj" />
 	</ItemGroup>
 
 </Project>

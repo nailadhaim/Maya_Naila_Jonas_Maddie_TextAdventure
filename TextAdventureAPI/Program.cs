@@ -64,7 +64,29 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TextAdventure API V1");
+    c.RoutePrefix = "swagger"; // Swagger blijft op /swagger
+});
+
+// Automatisch browser openen (alleen in development)
+if (app.Environment.IsDevelopment())
+{
+    var url = app.Urls.FirstOrDefault() ?? "https://localhost:7192/swagger/index.html";
+    try
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = url,
+            UseShellExecute = true
+        });
+    }
+    catch
+    {
+        // fallback: browser kon niet geopend worden
+    }
+}
 
 app.MapPost("/api/auth/register", ([FromBody] RegisterRequest req) =>
 {
@@ -154,7 +176,6 @@ static string GenerateJwt(User user, SymmetricSecurityKey key, WebApplicationBui
     {
         new Claim(ClaimTypes.Name, user.Username),
         new Claim(ClaimTypes.Role, user.Role)
-
     };
 
     var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
