@@ -14,4 +14,10 @@
 		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Auth\" />
+	  <Folder Include="Endpoints\" />
+	  <Folder Include="Models\" />
+	</ItemGroup>
+
 </Project>
