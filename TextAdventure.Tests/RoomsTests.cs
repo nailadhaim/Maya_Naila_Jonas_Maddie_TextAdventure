@@ -27,7 +27,8 @@ public class RoomsTests
 
         string result = rooms.Move(Direction.North);
 
-        Assert.AreEqual("This door is locked, you need a key!", result);
+        Assert.AreEqual(
+        "This door is locked. Try retrieving keyshare using command: keyshare " + rooms.CurrentRoom.North.Name,result);
     }
 
     [TestMethod]
