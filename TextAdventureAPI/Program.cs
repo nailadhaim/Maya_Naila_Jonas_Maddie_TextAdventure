@@ -67,10 +67,9 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TextAdventure API V1");
-    c.RoutePrefix = "swagger"; // Swagger blijft op /swagger
+    c.RoutePrefix = "swagger";
 });
 
-// Automatisch browser openen (alleen in development)
 if (app.Environment.IsDevelopment())
 {
     var url = app.Urls.FirstOrDefault() ?? "https://localhost:7192/swagger/index.html";
@@ -84,7 +83,7 @@ if (app.Environment.IsDevelopment())
     }
     catch
     {
-        // fallback: browser kon niet geopend worden
+       
     }
 }
 
@@ -202,7 +201,7 @@ static User? GetUserFromClaims(HttpContext ctx)
     {
         Username = username,
         Role = role,
-        PasswordHash = string.Empty, // of null, als je dat toestaat
+        PasswordHash = string.Empty, 
         IsLocked = false
     };
 }

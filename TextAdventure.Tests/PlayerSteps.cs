@@ -10,7 +10,7 @@ namespace TextAdventure.Tests
     {
         private Inventory inventory;
         private Rooms rooms;
-        private string lastMoveResult;  // Hier slaan we het resultaat van de laatste Move op
+        private string lastMoveResult;  
 
         [Given(@"the player is in the start room")]
         public void GivenThePlayerIsInTheStartRoom()

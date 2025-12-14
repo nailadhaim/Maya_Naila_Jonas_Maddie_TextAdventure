@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Maya_Naila_Jonas_Maddie_TextAdventure
 {
@@ -14,7 +11,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         public GameSetup()
         {
             Room start = new Room(
-                "Start room", 
+                "Start room",
                 Convert.ToBase64String(Encoding.UTF8.GetBytes("You are in the middle of the dungeon"))
             );
 
@@ -45,11 +42,16 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             down.South = deeper;
             deeper.North = down;
 
-            down.South = deeper;
-            deeper.North = down;
-
             right.AddItem(new Item("key", "Key", "An old key"));
             down.AddItem(new Item("sword", "Sword", "A sharp weapon to defend yourself"));
+
+            left.IsEncrypted = true;
+            left.RoomKeyId = "secretRoom1";
+            left.EncryptedFilePath = "secretRoom1.enc";
+
+            deeper.IsEncrypted = true;
+            deeper.RoomKeyId = "secretRoom2";
+            deeper.EncryptedFilePath = "secretRoom2.enc";
 
             StartRoom = start;
         }

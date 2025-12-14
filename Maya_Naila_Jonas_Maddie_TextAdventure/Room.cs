@@ -21,6 +21,10 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
         public Room West { get; set; }
 
         private List<Item> items = new List<Item>();
+        public bool IsEncrypted { get; set; } = false;
+        public string RoomKeyId { get; set; }
+        public string EncryptedFilePath { get; set; }
+
 
         public Room(string name, string description, bool encrypted = false)
         {

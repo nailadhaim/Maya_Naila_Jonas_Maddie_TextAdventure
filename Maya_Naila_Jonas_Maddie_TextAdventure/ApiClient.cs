@@ -25,7 +25,6 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 "textadventure_jwt.dat"
             );
 
-            // JWT uit opslag proberen laden
             try
             {
                 var existing = LoadJwtFromDisk();
@@ -119,7 +118,6 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             }
         }
 
-        // --- JWT VEILIGE OPSLAG ---
         private void SaveJwtToDisk(string jwt)
         {
             var data = Encoding.UTF8.GetBytes(jwt);

@@ -20,7 +20,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                     }
                     catch
                     {
-                        // Noclip fallback
+                        
                     }
                 }
 

@@ -11,7 +11,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
             inventory = new Inventory();
             GameSetup setup = new GameSetup();
             rooms = new Rooms(inventory, setup);
-                
+
             bool condition = true;
             ApiClient api = new ApiClient();
 
@@ -26,11 +26,11 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
 
             if (!ok)
             {
-                Console.WriteLine($"❌ Login failed");
+                Console.WriteLine($"Login failed");
                 return;
             }
 
-            Console.WriteLine("✅ Login success!");
+            Console.WriteLine("Login success!");
 
 
             Console.WriteLine("Hello, welcome to the text adventure game!!");
@@ -40,7 +40,7 @@ namespace Maya_Naila_Jonas_Maddie_TextAdventure
                 string[] parts = input.Split(" ");
                 string commando = parts[0];
                 string argument = null;
-                if(parts.Length > 1)
+                if (parts.Length > 1)
                 {
                     argument = parts[1].ToLower();
                 }
